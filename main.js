@@ -23,14 +23,14 @@ while(hour <= 12) {
 
         for(let i = 0; i < fishKept.length; i++) {
 
-            console.log(`* ${fishKept[i].name}, ${fishKept[i].weight} lbs, $${fishKept[i].value}`)
+            console.log(chalk.yellow(`* ${fishKept[i].name}, ${fishKept[i].weight} lbs, $${fishKept[i].value}`))
             weight += fishKept[i].weight
             value += fishKept[i].value
 
         }
         console.log("")
-        console.log(`Total weight: ${weight.toFixed(Number(2))}`)
-        console.log(`Total value: $${value.toFixed(Number(2))}`)
+        console.log("Total weight:", chalk.yellow(`${weight.toFixed(Number(2))} lbs`))
+        console.log("Total weight:", chalk.yellow(`$${value.toFixed(Number(2))}`))
         break
 
     }
@@ -48,7 +48,7 @@ while(hour <= 12) {
             weight += fishKept[i].weight
             value += fishKept[i].value
         }
-        return `${fishKept.length} fish, ${weight.toFixed(Number(2))} lbs, $${value.toFixed(Number(2))}`
+        return `${chalk.yellow(fishKept.length)} fish, ${chalk.yellow(weight.toFixed(Number(2)))} lbs, $${chalk.yellow(value.toFixed(Number(2)))}`
 
     }
     console.log("")
@@ -65,7 +65,7 @@ while(hour <= 12) {
         const fishAdj2 = ["Scaly", "Finned", "Bottom-dwelling", "Bigmouthed", "Smallmouthed", "Pickled", "Poisonous", "Red-bellied", "Freshwater", "Ferocious"]
         const fishType = ["Blobfish", "Bass", "Salmon", "Herring", "Angler", "Carp", "Guppy", "Goldfish", "Northern Pike", "Catfish"]
     
-        fish.name = `${fishAdj1[Math.ceil(Math.random() * fishAdj1.length - 1)]} ${fishAdj2[Math.ceil(Math.random() * fishAdj2.length - 1)]} ${fishType[Math.ceil(Math.random() * fishType.length - 1)]} `
+        fish.name = `${fishAdj1[Math.ceil(Math.random() * fishAdj1.length - 1)]} ${fishAdj2[Math.ceil(Math.random() * fishAdj2.length - 1)]} ${fishType[Math.ceil(Math.random() * fishType.length - 1)]}`
     
         fish.weight = Math.ceil(Math.random() * 1000) / 100
     
