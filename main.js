@@ -3,15 +3,48 @@ const chalk = require("chalk")
 
 console.log("You've gone fishing! Try to maximize the value of your caught fish. You can fish for six hours (till 12:00pm) and can catch at most 10 lbs of fish.")
 console.log("")
-console.log("==========================================")
+console.log(chalk.whiteBright("=========================================="))
 console.log("")
 
 let fishKept = []
+let hour = 6
 
-while(true) {
+while(hour <= 12) {
 
+    let name = ""
+    let weight = 0
+    let value = 0
     
+    if(hour === 12) {
+        console.log(`The time is ${hour}:00pm.  Times up!`)
+        console.log("")
+        console.log(`You caught ${fishKept.length} fish:`)
+        for(let i = 0; i < fishKept.length; i++) {
+            console.log(`* ${fishKept[i].name}, ${fishKept[i].weight} lbs, $${fishKept[i].value}`)
+            weight += fishKept[i].weight
+            value += fishKept[i].value
+        }
+        console.log("")
+        console.log(`Total weight: ${weight}`)
+        console.log(`Total value: $${value}`)
+        break
+    }
+    else {
+        console.log(`The Time is ${hour}:00am.  So far you've caught:`)
+        console.log(display())
+    }
 
+    function display() {
+
+        for(let i = 0; i < fishKept.length; i++) {
+            name = fishKept[i]
+            weight += fishKept[i].weight
+            value += fishKept[i].value
+        }
+        return `${fishKept.length} fish, ${weight.toFixed(Number(2))} lbs, $${value.toFixed(Number(2))}`
+
+    }
+    console.log("")
     function generateRandomFish() {
     
         const fish = {
@@ -30,32 +63,43 @@ while(true) {
     
         fish.value = Math.ceil(Math.random() * 1000) / 100
         
-        console.log(`You caught a '${fish.name}' weighing ${fish.weight} lbs with a value of $${fish.value}!`)
+        console.log(`You caught a '${chalk.yellow(fish.name)}' weighing ${chalk.yellow(fish.weight)} lbs with a value of $${chalk.yellow(fish.value)} !`)
     
         return fish
     
     }
-    const fish = generateRandomFish()
 
-    console.log("")
-    console.log("Your action: [c]atch or [r]elease?")
-    const choice = prompt()
+    if(fish.weight + weight > 10) {
 
-    if(choice === "c") {
-        fishKept.push(fish)
         console.log("")
-        console.log("You chose to keep the fish.")
-        console.log("")
-        console.log("==========================================")
-        console.log("")
+        console.log("This fish will put you over your 10 lb weight limit!  Please hit enter to release fish!")
+        prompt()
+
     }
-    if(choice === "r") {
+    else {
+
         console.log("")
-        console.log("You chose to release the fish.")
-        console.log("")
-        console.log("==========================================")
-        console.log("")
+        console.log(`Your action: ${chalk.green("[c]atch")} or ${chalk.red("[r]elease")} ?`)
+        const choice = prompt()
+
+        if(choice === "c") {
+            fishKept.push(fish)
+            console.log("")
+            console.log("You chose to keep the fish.")
+            console.log("")
+            console.log(chalk.whiteBright("=========================================="))
+            console.log("")
+        }
+        if(choice === "r") {
+            console.log("")
+            console.log("You chose to release the fish.")
+            console.log("")
+            console.log(chalk.whiteBright("=========================================="))
+            console.log("")
+        }
+
     }
-    console.log(fishKept)
+
+    hour++
 
 }
