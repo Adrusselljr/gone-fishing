@@ -29,8 +29,8 @@ while(hour <= 12) {
 
         }
         console.log("")
-        console.log(`Total weight: ${weight}`)
-        console.log(`Total value: $${value}`)
+        console.log(`Total weight: ${weight.toFixed(Number(2))}`)
+        console.log(`Total value: $${value.toFixed(Number(2))}`)
         break
 
     }
