@@ -14,7 +14,7 @@ while(hour <= 12) {
     let name = ""
     let weight = 0
     let value = 0
-    
+
     if(hour === 12) {
         console.log(`The time is ${hour}:00pm.  Times up!`)
         console.log("")
@@ -68,6 +68,7 @@ while(hour <= 12) {
         return fish
     
     }
+    const fish = generateRandomFish()
 
     if(fish.weight + weight > 10) {
 
