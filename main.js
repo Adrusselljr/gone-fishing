@@ -16,22 +16,29 @@ while(hour <= 12) {
     let value = 0
 
     if(hour === 12) {
+
         console.log(`The time is ${hour}:00pm.  Times up!`)
         console.log("")
         console.log(`You caught ${fishKept.length} fish:`)
+
         for(let i = 0; i < fishKept.length; i++) {
+
             console.log(`* ${fishKept[i].name}, ${fishKept[i].weight} lbs, $${fishKept[i].value}`)
             weight += fishKept[i].weight
             value += fishKept[i].value
+
         }
         console.log("")
         console.log(`Total weight: ${weight}`)
         console.log(`Total value: $${value}`)
         break
+
     }
     else {
+
         console.log(`The Time is ${hour}:00am.  So far you've caught:`)
         console.log(display())
+        
     }
 
     function display() {
@@ -45,6 +52,7 @@ while(hour <= 12) {
 
     }
     console.log("")
+
     function generateRandomFish() {
     
         const fish = {
