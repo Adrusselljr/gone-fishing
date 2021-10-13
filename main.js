@@ -38,7 +38,7 @@ while(hour <= 12) {
 
         console.log(`The Time is ${hour}:00am.  So far you've caught:`)
         console.log(display())
-        
+
     }
 
     function display() {
@@ -81,7 +81,9 @@ while(hour <= 12) {
     if(fish.weight + weight > 10) {
 
         console.log("")
-        console.log("This fish will put you over your 10 lb weight limit!  Please hit enter to release fish!")
+        console.log("This fish will put you over your 10 lbs, so you release it")
+        console.log("")
+        console.log("Press [enter] to continue.")
         prompt()
 
     }
