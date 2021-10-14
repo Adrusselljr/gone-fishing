@@ -8,8 +8,15 @@ console.log("")
 
 let fishKept = []
 let hour = 6.00
+let amountOfChum = 0
+let chance = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
 while(true) {
+
+    function lucky() {
+        return chance[Math.ceil(Math.random() * chance.length - 1)]
+    }
+    let num
 
     let name = ""
     let weight = 0
@@ -36,8 +43,15 @@ while(true) {
     }
     else {
 
-        console.log(`The Time is ${Number(hour.toFixed(2))}am.  So far you've caught:`)
-        console.log(display())
+        if(amountOfChum > 0) {
+            console.log(`The Time is ${Number(hour.toFixed(2))}am.  So far you've caught:`)
+            console.log(display())
+            console.log(`You have ${chalk.yellow(amountOfChum)} minutes of chum remaining!`)
+        }
+        else {
+            console.log(`The Time is ${Number(hour.toFixed(2))}am.  So far you've caught:`)
+            console.log(display())
+        }
 
     }
 
@@ -54,6 +68,8 @@ while(true) {
     console.log("")
 
     function generateRandomFish() {
+
+        num = lucky()
     
         const fish = {
             name: "",
@@ -67,13 +83,35 @@ while(true) {
         const fishType = ["Blobfish", "Bass", "Salmon", "Herring", "Angler", "Carp", "Guppy", "Goldfish", "Northern Pike", "Catfish"]
         const time = [0.15, 0.25, 0.50, 0.75]
     
-        fish.name = `${fishAdj1[Math.ceil(Math.random() * fishAdj1.length - 1)]} ${fishAdj2[Math.ceil(Math.random() * fishAdj2.length - 1)]} ${fishType[Math.ceil(Math.random() * fishType.length - 1)]}`
+        if(num === 7) {
+            console.log(chalk.bgMagenta(chalk.black("CONGRADULATIONS, YOU FOUND IT!")))
+            fish.name = "Golden Doubloon"
+            fish.weight = Math.ceil(Math.random() * 1000) / 100
+            fish.value = 100.00
+            fish.time = time[Math.ceil(Math.random() * time.length - 1)]
+        }
+        else if(num === 0) {
+            console.log(chalk.bgMagenta(chalk.black("OOPS!!")))
+            fish.name = "Valueless Boot"
+            fish.weight = Math.ceil(Math.random() * 1000) / 100
+            fish.value = 0.00
+            fish.time = time[Math.ceil(Math.random() * time.length - 1)]
+        }
+        else {
+            fish.name = `${fishAdj1[Math.ceil(Math.random() * fishAdj1.length - 1)]} ${fishAdj2[Math.ceil(Math.random() * fishAdj2.length - 1)]} ${fishType[Math.ceil(Math.random() * fishType.length - 1)]}`
+            fish.weight = Math.ceil(Math.random() * 1000) / 100
+            fish.value = Math.ceil(Math.random() * 1000) / 100
+            fish.time = time[Math.ceil(Math.random() * time.length - 1)]
+        }
     
-        fish.weight = Math.ceil(Math.random() * 1000) / 100
-    
-        fish.value = Math.ceil(Math.random() * 1000) / 100
 
-        fish.time = time[Math.ceil(Math.random() * time.length - 1)]
+        if(amountOfChum > 0) {
+            fish.time = time[Math.ceil(Math.random() * time.length - 1)] / 2
+        }
+        else {
+            fish.time = time[Math.ceil(Math.random() * time.length - 1)]
+        }
+
         
         console.log(`You caught a '${chalk.yellow(fish.name)}' weighing ${chalk.yellow(fish.weight)} lbs with a value of ${chalk.yellow('$' + fish.value)}, and took ${chalk.yellow(fish.time)} hours!`)
     
@@ -95,7 +133,7 @@ while(true) {
     else {
 
         console.log("")
-        console.log(`Your action: ${chalk.green("[c]atch")} or ${chalk.red("[r]elease")} ?`)
+        console.log(`Your action: ${chalk.green("[c]atch")} or ${chalk.red("[r]elease")} or ${chalk.blueBright("chum [w]ater")} ?`)
         const choice = prompt()
 
         if(choice === "c") {
@@ -113,9 +151,19 @@ while(true) {
             console.log(chalk.whiteBright("=========================================="))
             console.log("")
         }
+        if(choice === "w") {
+            amountOfChum = 25
+            console.log("")
+            console.log("You chose to chum the water.")
+            console.log("This took 0.50 hours!")
+            console.log("")
+            console.log(chalk.whiteBright("=========================================="))
+            console.log("")
+        }
 
     }
 
     hour += fish.time
+    amountOfChum -= 5
 
 }
