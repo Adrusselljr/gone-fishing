@@ -133,7 +133,13 @@ while(true) {
     else {
 
         console.log("")
-        console.log(`Your action: ${chalk.green("[c]atch")} or ${chalk.red("[r]elease")} or ${chalk.blueBright("chum [w]ater")} ?`)
+        if(fishKept.length > 0){
+            console.log(`Your action: ${chalk.green("[c]atch")} or ${chalk.red("[r]elease")} or ${chalk.blueBright("chum [w]ater")} ?`)
+            // console.log(`${chalk.blue("[l]ivewell")}`)
+        }
+        else {
+            console.log(`Your action: ${chalk.green("[c]atch")} or ${chalk.red("[r]elease")} or ${chalk.blueBright("chum [w]ater")} ?`)
+        }
         const choice = prompt()
 
         if(choice === "c") {
@@ -160,6 +166,17 @@ while(true) {
             console.log(chalk.whiteBright("=========================================="))
             console.log("")
         }
+        // if(choice === "l") {
+        //     console.log("")
+        //     console.log("You chose to look in your livewell.")
+        //     console.log("")
+        //     console.log("Here are your fish:")
+        //     for(let i = 0; i < fishKept.length; i++) {
+        //         console.log(chalk.yellow(`${i + 1} ${fishKept[i].name}, ${fishKept[i].weight} lbs, $${fishKept[i].value}`))
+        //     }
+        //     console.log("")
+        //     console.log(chalk.whiteBright("=========================================="))
+        // }
 
     }
 
